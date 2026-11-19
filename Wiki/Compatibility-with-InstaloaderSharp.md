@@ -41,6 +41,7 @@ Some features depend on fixes in InstaloaderSharp:
 
 | Feature | Needs InstaloaderSharp |
 |---|---|
+| One request per tagged picture post instead of two when signed in, which makes it less likely that Instagram asks to verify the account; continuing when Instagram lists a post without its pictures (older versions stop the whole download with *IndexError: list index out of range*) | 1.1.6 or later |
 | A clear message when Instagram wants the account **verified** and redirects to its verification page: signing in, **Check session** and downloads report *Instagram asks to verify the account* (older versions report the valid session as not signed in, and ask for the password) | 1.1.5 or later |
 | Downloading into a folder on a **network drive or share** without stopping after the first picture (older versions can fail to set the file's date there) | 1.1.4 or later |
 | Stopping with **Download aborted** when Instagram asks a signed-in account for a verification (captcha), instead of retrying and going on with the next targets; one request per signed-in reel instead of two; lower request limits when signed in. All three make it less likely that Instagram flags the account | 1.1.3 or later |

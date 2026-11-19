@@ -104,6 +104,15 @@ Check the **Post filter**, **Maximum number of posts** (hashtags, locations, fee
 **Only a few tagged posts are downloaded.**
 Use InstaloaderSharp 1.0.5 or later; older versions stop after the first few tagged posts. With **Fast update** or **Remember latest downloads**, a post in which the profile was tagged recently can also stop the download early, because Instagram lists tagged posts in the order of tagging; see [Tagged posts](Keeping-an-archive-up-to-date#tagged-posts).
 
+**Downloading the tagged posts of a profile got the account asked to verify (*challenge_required*).**
+Each tagged post is loaded with a request of its own. Older versions of InstaloaderSharp also ask Instagram's app for each picture's details, two requests per post; use InstaloaderSharp 1.1.6 or later, which needs one. With **Fast update** or **Remember latest downloads**, later downloads only load the new tagged posts. Spread first downloads of large profiles over several days, one profile at a time.
+
+**The download stops with *IndexError: list index out of range*.**
+Instagram listed a post without its pictures. Use InstaloaderSharp 1.1.6 or later, which loads the pictures from the post's details instead and continues. If the details contain no pictures either, the error *Instagram returned no picture of …* names the post, and the other posts are still downloaded.
+
+***Fetching Post metadata of … failed: Instagram answered without the post***
+Instagram answered the details of a post without the post; it has answered normally later. A download of tagged posts or reels stops at that post so that none is skipped. Start the download again later: it continues at that post. InstaloaderSharp 1.1.6 or later names the post and shows the start of Instagram's answer; older versions only report *Fetching Post metadata failed.*
+
 **Downloading the reels of a profile with many reels got the account flagged.**
 Each reel is loaded with a request of its own. Older versions of InstaloaderSharp also ask Instagram's app for each video's details, two requests per reel; use InstaloaderSharp 1.1.3 or later, which needs one. The first download of a profile with many reels still takes about one request per reel; with **Fast update** or **Remember latest downloads**, later downloads only load the new reels. Spread first downloads of large profiles over several days, one profile at a time.
 
