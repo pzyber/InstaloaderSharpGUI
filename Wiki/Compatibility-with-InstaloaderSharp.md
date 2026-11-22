@@ -41,6 +41,7 @@ Some features depend on fixes in InstaloaderSharp:
 
 | Feature | Needs InstaloaderSharp |
 |---|---|
+| **Highlights** of profiles that have highlights only for their subscribers: these are skipped and the other highlights are downloaded (older versions stop the download with a *NullReferenceException*) | 1.1.7 or later |
 | One request per tagged picture post instead of two when signed in, which makes it less likely that Instagram asks to verify the account; continuing when Instagram lists a post without its pictures (older versions stop the whole download with *IndexError: list index out of range*) | 1.1.6 or later |
 | A clear message when Instagram wants the account **verified** and redirects to its verification page: signing in, **Check session** and downloads report *Instagram asks to verify the account* (older versions report the valid session as not signed in, and ask for the password) | 1.1.5 or later |
 | Downloading into a folder on a **network drive or share** without stopping after the first picture (older versions can fail to set the file's date there) | 1.1.4 or later |

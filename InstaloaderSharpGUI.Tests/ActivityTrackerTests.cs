@@ -96,6 +96,27 @@ namespace InstaloaderSharpGUI.Tests
         }
 
         [TestMethod]
+        public void SkippedSubscriberHighlightsAreStepsNotItems()
+        {
+            // InstaloaderSharp 1.1.7+ skips highlights that are only for subscribers with a counted line of its own.
+            ActivityTracker t = Feed("[1/1] Downloading profile natgeo\n",
+                                     "[1/3] Retrieving highlights \"Travel\" from profile natgeo\n",
+                                     "[1/2] ", "natgeo\\a.jpg\n",
+                                     "[2/3] Highlights \"Club\" from profile natgeo are only for its subscribers, skipped\n");
+            Assert.AreEqual(1, t.Processed, "the skipped highlight is not an item");
+            Assert.AreEqual("Highlights \"Club\" from profile natgeo are only for its subscribers, skipped (2 of 3)", t.Phase);
+            Assert.AreEqual(0, t.Item);
+            Assert.AreEqual(0, t.ItemTotal);
+
+            t.Feed("[3/3] Retrieving highlights \"Food\" from profile natgeo\n", LogKind.Output);
+            t.Feed("[1/4] ", LogKind.Output);
+            Assert.AreEqual("Retrieving highlights \"Food\" from profile natgeo (3 of 3)", t.Phase);
+            Assert.AreEqual(1, t.Item);
+            Assert.AreEqual(4, t.ItemTotal);
+            Assert.AreEqual(2, t.Processed);
+        }
+
+        [TestMethod]
         public void CountedStoriesAreStepsNotItems()
         {
             // Stories of several profiles: "[1/2] Retrieving stories from profile ...", and for :stories "[  1] ...".

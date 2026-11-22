@@ -228,10 +228,12 @@ namespace InstaloaderSharpGUI.Core
         private static readonly Regex CountRx = new Regex(@"^\[\s*(\d+)/\s*(\d+)\]\s");
         private static readonly Regex OpenCountRx = new Regex(@"^\[\s*(\d+)\]\s");
         private static readonly Regex RetrievingRx = new Regex(@"^(Retrieving .+?)(?:\.\.\.|\.)?\s*$");
-        // Counted steps rather than items, e.g. "[3/9] Retrieving highlights "Travel" from profile natgeo" and
-        // "[1/2] Retrieving stories from profile natgeo." (or "[  1] ..." without a total).
-        private static readonly Regex StepRx = new Regex(@"^\[\s*(\d+)(?:/\s*(\d+))?\]\s+(?:Downloading profile |Retrieving )");
-        private static readonly Regex CountedRetrievingRx = new Regex(@"^\[\s*(\d+)(?:/\s*(\d+))?\]\s+(Retrieving .+?)(?:\.\.\.|\.)?\s*$");
+        // Counted steps rather than items, e.g. "[3/9] Retrieving highlights "Travel" from profile natgeo",
+        // "[1/2] Retrieving stories from profile natgeo." (or "[  1] ..." without a total) and, since InstaloaderSharp
+        // 1.1.7, "[4/9] Highlights "Club" from profile natgeo are only for its subscribers, skipped". File names
+        // cannot contain '"', so an item is never mistaken for a highlight.
+        private static readonly Regex StepRx = new Regex(@"^\[\s*(\d+)(?:/\s*(\d+))?\]\s+(?:Downloading profile |Retrieving |Highlights "")");
+        private static readonly Regex CountedRetrievingRx = new Regex(@"^\[\s*(\d+)(?:/\s*(\d+))?\]\s+(Retrieving .+?|Highlights "".+?)(?:\.\.\.|\.)?\s*$");
 
         private string _line = "";
 
